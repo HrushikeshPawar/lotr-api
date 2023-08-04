@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - vercel_stage
+  workflow_dispatch:
+
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
