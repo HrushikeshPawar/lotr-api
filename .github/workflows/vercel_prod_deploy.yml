@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - deploy_prod
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
