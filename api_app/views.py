@@ -147,3 +147,24 @@ def get_character_list(request):
 
     # Return the serialized data
     return JsonResponse({'characters': serializer.data}, status=status.HTTP_200_OK)
+
+
+# Get a character by id, requires authentication
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def get_character_by_id(request, character_id):
+
+    ## Get the character from the database
+    # Check if the character exists
+    try:
+        character = Character.objects.get(character_id=character_id)
+    except Character.DoesNotExist:
+        return JsonResponse({'message': 'The character does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Serialize the data
+    serializer = CharacterSerializer(character)
+
+    # Return the serialized data
+    return JsonResponse({'character': serializer.data}, status=status.HTTP_200_OK)
+
