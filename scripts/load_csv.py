@@ -2,6 +2,7 @@
 from api_app.models import Book, Chapter, Character, Movie, Quote
 import csv
 import os
+from tqdm.auto import tqdm
 
 
 # Create new Book objects from csv
@@ -19,7 +20,7 @@ def create_Books(csv_file):
 
         # Create a new Book object for each row in the csv
         #   Assumes the columns are in the order of your models
-        for row in reader:
+        for row in tqdm(reader, desc="Creating Books"):
             Book.objects.create(
                 book_id=row[1],
                 book_name=row[0],
@@ -41,7 +42,7 @@ def create_Chapters(csv_file):
 
         # Create a new Chapter object for each row in the csv
         #   Assumes the columns are in the order of your models
-        for row in reader:
+        for row in tqdm(reader, desc="Creating Chapters"):
             Chapter.objects.create(
                 chapter_name=row[0],
                 book_id=Book.objects.get(book_id=row[1]),
@@ -63,7 +64,7 @@ def create_Characters(csv_file):
 
         # Create a new Chapter object for each row in the csv
         #   Assumes the columns are in the order of your models
-        for row in reader:
+        for row in tqdm(reader, desc="Creating Characters"):
             Character.objects.create(
                 character_name = row[0],
                 character_wikiurl = row[1],
@@ -93,7 +94,7 @@ def create_Movies(csv_file):
 
         # Create a new Chapter object for each row in the csv
         #   Assumes the columns are in the order of your models
-        for row in reader:
+        for row in tqdm(reader, desc="Creating Movies"):
             Movie.objects.create(
                 movie_name = row[0],
                 movie_runtimeInMinutes = row[1],
@@ -120,7 +121,7 @@ def create_Quotes(csv_file):
 
         # Create a new Chapter object for each row in the csv
         #   Assumes the columns are in the order of your models
-        for row in reader:
+        for row in tqdm(reader, desc="Creating Quotes"):
             Quote.objects.create(
                 quote_dialog = row[0],
                 quote_movie_id = Movie.objects.get(movie_id=row[1]),

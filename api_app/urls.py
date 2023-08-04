@@ -8,10 +8,4 @@ urlpatterns = [
     path('book/<str:book_id>', views.get_book_by_id),
     path('chapters', views.get_chapter_list),
     path('chapter/<str:chapter_id>', views.get_chapter_by_id),
-    path('characters', views.get_character_list),
-    path('character/<str:character_id>', views.get_character_by_id),
-    path('movies', views.get_movie_list),
-    path('movie/<str:movie_id>', views.get_movie_by_id),
-    path('quotes', views.get_quote_list),
-    path('quote/<str:quote_id>', views.get_quote_by_id),
 ]
