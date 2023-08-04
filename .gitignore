@@ -1,3 +1,4 @@
 *.pyc
 *.bson
 db/bson
+*.rest

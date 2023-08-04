@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Book, Chapter, Character, Movie, Quote
+from django.contrib.auth.models import User
 
 
 # The Book Serializer
@@ -35,3 +36,10 @@ class QuoteSerializer(ModelSerializer):
     class Meta:
         model = Quote
         fields = '__all__'
+
+
+# The User Serializer
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
