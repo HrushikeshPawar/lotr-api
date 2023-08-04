@@ -4,8 +4,6 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches:
-      - vercel_stage
     tags:
       - deploy_stage
   workflow_dispatch:
