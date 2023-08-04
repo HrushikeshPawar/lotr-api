@@ -131,3 +131,19 @@ def get_chapter_by_id(request, chapter_id):
     
         # Return the serialized data
         return JsonResponse({'chapter': serializer.data}, status=status.HTTP_200_OK)
+
+
+# Get all the characters from LoTR, requires authentication
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def get_character_list(request):
+
+    # Get all the characters from the database
+    characters = Character.objects.all()
+
+    # Serialize the data
+    serializer = CharacterSerializer(characters, many=True)
+
+    # Return the serialized data
+    return JsonResponse({'characters': serializer.data}, status=status.HTTP_200_OK)
