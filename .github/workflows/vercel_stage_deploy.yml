@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - vercel_stage
-    tags:
-      - deploy_stage
   workflow_dispatch:
 
 jobs:
