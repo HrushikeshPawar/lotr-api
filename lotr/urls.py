@@ -16,9 +16,14 @@ Including another URLconf
 """
 from django.urls import path, include
 from . import views
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('', views.welcome),
     path('api', views.api_info),
-    path('api/', include('api_app.urls'))   
+    path('api/', include('api_app.urls')),
+    path('api/docs', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url': 'openapi-schema'}
+    ), name='swagger-ui'),
 ]
