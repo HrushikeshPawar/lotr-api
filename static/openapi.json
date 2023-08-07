@@ -1,0 +1,14 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "The One API - Lord of the Rings",
+        "description": "This is the one API (Application Programming Interface) to rule them all. It serves your needs regarding data about The Lord of the Rings, the epic books by J. R. R. Tolkien and the official movie adaptations by Peter Jackson.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://lotr-django-api.vercel.app/api",
+            "description": "The One API server"
+        }
+    ]
+}
