@@ -1,0 +1,22 @@
+name: API Documentation - Using DocGenAI
+
+on:
+    workflow_dispatch:
+
+jobs:
+    doc:
+        uses: HrushikeshPawar/DocGenAI/.github/workflows/DocGen.yml@main
+        with:
+            root: api_app
+            route_files: api_app/urls.py
+            model_files: api_app/models.py
+            function_files: api_app/views.py
+            api_title: The One API - Lord of the Rings
+            api_description: This is the one API (Application Programming Interface) to rule them all. It serves your needs regarding data about The Lord of the Rings, the epic books by J. R. R. Tolkien and the official movie adaptations by Peter Jackson.
+            api_version: 1.0.0
+            api_server_url: https://lotr-django-api.vercel.app/api
+            extracted_dir: static
+        secrets:
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+            LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+            LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
