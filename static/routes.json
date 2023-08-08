@@ -1,0 +1,50 @@
+{
+    "register": {
+        "route_def": "path('register', views.register_user)",
+        "required_function": [
+            "register_user"
+        ]
+    },
+    "login": {
+        "route_def": "path('login', views.login_user)",
+        "required_function": [
+            "login_user"
+        ]
+    },
+    "books": {
+        "route_def": "path('books', views.get_book_list)",
+        "required_function": [
+            "get_book_list"
+        ]
+    },
+    "book/<str:book_id>": {
+        "route_def": "path('book/<str:book_id>', views.get_book_by_id)",
+        "required_function": [
+            "get_book_by_id"
+        ]
+    },
+    "chapters": {
+        "route_def": "path('chapters', views.get_chapter_list)",
+        "required_function": [
+            "get_chapter_list"
+        ]
+    },
+    "chapter/<str:chapter_id>": {
+        "route_def": "path('chapter/<str:chapter_id>', views.get_chapter_by_id)",
+        "required_function": [
+            "get_chapter_by_id"
+        ]
+    },
+    "characters": {
+        "route_def": "path('characters', views.get_character_list)",
+        "required_function": [
+            "get_character_list"
+        ]
+    },
+    "character/<str:character_id>": {
+        "route_def": "path('character/<str:character_id>', views.get_character_by_id)",
+        "required_function": [
+            "get_character_by_id"
+        ]
+    }
+}

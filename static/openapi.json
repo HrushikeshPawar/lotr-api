@@ -8,7 +8,431 @@
     "servers": [
         {
             "url": "https://lotr-django-api.vercel.app/api",
-            "description": "The One API server"
+            "description": "The One API - Lord of the Rings server"
         }
-    ]
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "summary": "Register a new user",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login User",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User credentials",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detail": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books": {
+            "get": {
+                "summary": "Get a list of books",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "books": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Book"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/book/{book_id}": {
+            "get": {
+                "summary": "Get a book by ID",
+                "parameters": [
+                    {
+                        "name": "book_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Book not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/chapters": {
+            "get": {
+                "summary": "Get a list of chapters",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "chapters": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Chapter"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
+        },
+        "/chapter/{chapter_id}": {
+            "get": {
+                "summary": "Get chapter by ID",
+                "parameters": [
+                    {
+                        "name": "chapter_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Chapter found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chapter"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Chapter not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
+        },
+        "/characters": {
+            "get": {
+                "summary": "Get a list of characters",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "characters": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Character"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
+        },
+        "/character/{character_id}": {
+            "get": {
+                "summary": "Get character by ID",
+                "parameters": [
+                    {
+                        "name": "character_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Character"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The character does not exist",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Book": {
+                "type": "object",
+                "properties": {
+                    "book_id": {
+                        "type": "string"
+                    },
+                    "book_name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Chapter": {
+                "type": "object",
+                "properties": {
+                    "chapter_id": {
+                        "type": "string"
+                    },
+                    "chapter_name": {
+                        "type": "string"
+                    },
+                    "book_id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Character": {
+                "type": "object",
+                "properties": {
+                    "character_id": {
+                        "type": "string"
+                    },
+                    "character_name": {
+                        "type": "string"
+                    },
+                    "character_race": {
+                        "type": "string"
+                    },
+                    "character_gender": {
+                        "type": "string"
+                    },
+                    "character_birth": {
+                        "type": "string"
+                    },
+                    "character_death": {
+                        "type": "string"
+                    },
+                    "character_hair": {
+                        "type": "string"
+                    },
+                    "character_height": {
+                        "type": "string"
+                    },
+                    "character_relam": {
+                        "type": "string"
+                    },
+                    "character_spouse": {
+                        "type": "string"
+                    },
+                    "character_wikiurl": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "TokenAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            },
+            "SessionAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Cookie"
+            }
+        }
+    }
 }
