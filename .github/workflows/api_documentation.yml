@@ -5,6 +5,7 @@ on:
 
 jobs:
     doc:
+        name: DocGenAI
         uses: HrushikeshPawar/DocGenAI/.github/workflows/DocGen.yml@main
         with:
             root: $(pwd)/code-repo
@@ -20,3 +21,4 @@ jobs:
             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
             LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
             LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
+            GITHUB_TOKEN_CODEREPO: ${{ secrets.GITHUB_TOKEN }}
