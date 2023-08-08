@@ -1,11 +1,15 @@
-name: API Documentation - Using DocGenAI
+name: Document and Deploy to Vercel Stagging
 
 on:
+    push:
+        branches:
+            - vercel_stage
     workflow_dispatch:
 
 jobs:
     doc:
         name: DocGenAI
+
         uses: HrushikeshPawar/DocGenAI/.github/workflows/DocGen.yml@main
         with:
             root: $(pwd)/code-repo
@@ -22,3 +26,13 @@ jobs:
             LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
             LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
             GITHUB_TOKEN_CODEREPO: ${{ secrets.GITHUB_TOKEN }}
+    
+    Deploy-Production:
+        needs: doc
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v3
+            -   name: Install Vercel CLI
+                run: npm install --global vercel@latest
+            -   name: Deploy Project Artifacts to Vercel
+                run: vercel --token=${{ secrets.VERCEL_TOKEN }}
