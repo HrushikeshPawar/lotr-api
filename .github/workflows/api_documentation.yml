@@ -7,7 +7,7 @@ jobs:
     doc:
         uses: HrushikeshPawar/DocGenAI/.github/workflows/DocGen.yml@main
         with:
-            root: api_app
+            root: $(pwd)/code-repo
             route_files: api_app/urls.py
             model_files: api_app/models.py
             function_files: api_app/views.py
