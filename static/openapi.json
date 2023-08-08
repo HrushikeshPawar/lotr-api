@@ -60,7 +60,6 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "User credentials",
                         "required": true,
                         "schema": {
                             "type": "object",
@@ -77,7 +76,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful login",
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -95,7 +94,7 @@
                         }
                     },
                     "404": {
-                        "description": "User not found",
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -305,7 +304,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -315,7 +314,7 @@
                         }
                     },
                     "404": {
-                        "description": "Character not found",
+                        "description": "The character does not exist",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -354,6 +353,12 @@
                         "type": "integer"
                     },
                     "email": {
+                        "type": "string"
+                    },
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "last_name": {
                         "type": "string"
                     }
                 }
