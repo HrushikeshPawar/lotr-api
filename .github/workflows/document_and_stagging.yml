@@ -27,7 +27,7 @@ jobs:
             LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
             GITHUB_TOKEN_CODEREPO: ${{ secrets.GITHUB_TOKEN }}
     
-    Deploy-Production:
+    Deploy-Stagging:
         needs: doc
         runs-on: ubuntu-latest
         steps:
@@ -35,4 +35,4 @@ jobs:
             -   name: Install Vercel CLI
                 run: npm install --global vercel@latest
             -   name: Deploy Project Artifacts to Vercel
-                run: vercel --token=${{ secrets.VERCEL_TOKEN }}
+                run: vercel --token=${{ secrets.VERCEL_TOKEN }} -y
