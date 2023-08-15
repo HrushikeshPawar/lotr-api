@@ -304,7 +304,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success",
+                        "description": "Successful response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -314,7 +314,7 @@
                         }
                     },
                     "404": {
-                        "description": "The character does not exist",
+                        "description": "Character not found",
                         "content": {
                             "application/json": {
                                 "schema": {
