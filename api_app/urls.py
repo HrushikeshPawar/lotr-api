@@ -10,4 +10,6 @@ urlpatterns = [
     path('chapter/<str:chapter_id>', views.get_chapter_by_id),
     path('characters', views.get_character_list),
     path('character/<str:character_id>', views.get_character_by_id),
+    path('movies', views.get_movie_list),
+    path('movie/<str:movie_id>', views.get_movie_by_id),
 ]

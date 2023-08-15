@@ -168,3 +168,38 @@ def get_character_by_id(request, character_id):
     # Return the serialized data
     return JsonResponse({'character': serializer.data}, status=status.HTTP_200_OK)
 
+
+# Get all the movies from LoTR, requires authentication
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def get_movie_list(request):
+
+    # Get all the movies from the database
+    movies = Movie.objects.all()
+
+    # Serialize the data
+    serializer = MovieSerializer(movies, many=True)
+
+    # Return the serialized data
+    return JsonResponse({'movies': serializer.data}, status=status.HTTP_200_OK)
+
+
+# Get a movie by id, requires authentication
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def get_movie_by_id(request, movie_id):
+
+    ## Get the movie from the database
+    # Check if the movie exists
+    try:
+        movie = Movie.objects.get(movie_id=movie_id)
+    except Movie.DoesNotExist:
+        return JsonResponse({'message': 'The movie does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Serialize the data
+    serializer = MovieSerializer(movie)
+
+    # Return the serialized data
+    return JsonResponse({'movie': serializer.data}, status=status.HTTP_200_OK)
