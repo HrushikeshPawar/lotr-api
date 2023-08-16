@@ -46,5 +46,17 @@
         "required_function": [
             "get_character_by_id"
         ]
+    },
+    "movies": {
+        "route_def": "path('movies', views.get_movie_list)",
+        "required_function": [
+            "get_movie_list"
+        ]
+    },
+    "movie/<str:movie_id>": {
+        "route_def": "path('movie/<str:movie_id>', views.get_movie_by_id)",
+        "required_function": [
+            "get_movie_by_id"
+        ]
     }
 }

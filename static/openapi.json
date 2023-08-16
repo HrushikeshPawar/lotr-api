@@ -342,6 +342,85 @@
                     }
                 ]
             }
+        },
+        "/movies": {
+            "get": {
+                "summary": "Get a list of movies",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "movies": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Movie"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
+        },
+        "/movie/{movie_id}": {
+            "get": {
+                "summary": "Get a movie by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "movie_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Movie not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -442,6 +521,35 @@
                     },
                     "character_wikiurl": {
                         "type": "string"
+                    }
+                }
+            },
+            "Movie": {
+                "type": "object",
+                "properties": {
+                    "movie_id": {
+                        "type": "string"
+                    },
+                    "movie_name": {
+                        "type": "string"
+                    },
+                    "movie_runtimeInMinutes": {
+                        "type": "integer"
+                    },
+                    "movie_budgetInMillions": {
+                        "type": "integer"
+                    },
+                    "movie_boxOfficeRevenueInMillions": {
+                        "type": "number"
+                    },
+                    "movie_academyAwardNominations": {
+                        "type": "integer"
+                    },
+                    "movie_academyAwardWins": {
+                        "type": "integer"
+                    },
+                    "movie_rottenTomatoesScore": {
+                        "type": "number"
                     }
                 }
             }
