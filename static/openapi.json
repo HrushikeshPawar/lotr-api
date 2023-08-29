@@ -153,12 +153,12 @@
                 "summary": "Get a book by ID",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "book_id",
+                        "in": "path",
+                        "required": true,
                         "schema": {
                             "type": "string"
-                        },
-                        "required": true
+                        }
                     }
                 ],
                 "responses": {
@@ -215,8 +215,10 @@
                 },
                 "security": [
                     {
-                        "TokenAuth": [],
-                        "SessionAuth": []
+                        "TokenAuthentication": []
+                    },
+                    {
+                        "IsAuthenticated": []
                     }
                 ]
             }
@@ -250,7 +252,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorMessage"
+                                    "$ref": "#/components/schemas/ErrorResponse"
                                 }
                             }
                         }
@@ -258,8 +260,7 @@
                 },
                 "security": [
                     {
-                        "TokenAuth": [],
-                        "SessionAuth": []
+                        "TokenAuth": []
                     }
                 ]
             }
@@ -289,8 +290,10 @@
                 },
                 "security": [
                     {
-                        "TokenAuth": [],
-                        "SessionAuth": []
+                        "TokenAuthentication": []
+                    },
+                    {
+                        "IsAuthenticated": []
                     }
                 ]
             }
@@ -337,8 +340,10 @@
                 },
                 "security": [
                     {
-                        "TokenAuth": [],
-                        "SessionAuth": []
+                        "TokenAuthentication": []
+                    },
+                    {
+                        "IsAuthenticated": []
                     }
                 ]
             }
@@ -368,8 +373,7 @@
                 },
                 "security": [
                     {
-                        "TokenAuth": [],
-                        "SessionAuth": []
+                        "TokenAuth": []
                     }
                 ]
             }
@@ -416,8 +420,8 @@
                 },
                 "security": [
                     {
-                        "TokenAuth": [],
-                        "SessionAuth": []
+                        "TokenAuthentication": [],
+                        "IsAuthenticated": []
                     }
                 ]
             }
@@ -478,7 +482,7 @@
                     }
                 }
             },
-            "ErrorMessage": {
+            "ErrorResponse": {
                 "type": "object",
                 "properties": {
                     "message": {
@@ -555,15 +559,20 @@
             }
         },
         "securitySchemes": {
-            "TokenAuth": {
+            "TokenAuthentication": {
                 "type": "apiKey",
                 "in": "header",
                 "name": "Authorization"
             },
-            "SessionAuth": {
+            "IsAuthenticated": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            },
+            "TokenAuth": {
                 "type": "apiKey",
                 "in": "header",
-                "name": "Cookie"
+                "name": "Authorization"
             }
         }
     }

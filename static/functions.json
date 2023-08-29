@@ -20,37 +20,37 @@
         ]
     },
     "get_chapter_list": {
-        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication, SessionAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_chapter_list(request):\n\n    # Get all the chapters from the database\n    chapters = Chapter.objects.all()\n\n    # Serialize the data\n    serializer = ChapterSerializer(chapters, many=True)\n\n    # Return the serialized data\n    return JsonResponse({'chapters': serializer.data}, status=status.HTTP_200_OK)",
+        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_chapter_list(request):\n\n    # Get all the chapters from the database\n    chapters = Chapter.objects.all()\n\n    # Serialize the data\n    serializer = ChapterSerializer(chapters, many=True)\n\n    # Return the serialized data\n    return JsonResponse({'chapters': serializer.data}, status=status.HTTP_200_OK)",
         "required_models": [
             "Chapter"
         ]
     },
     "get_chapter_by_id": {
-        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication, SessionAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_chapter_by_id(request, chapter_id):\n    \n        # Get the chapter from the database\n        # Check if the chapter exists\n        try:\n            chapter = Chapter.objects.get(chapter_id=chapter_id)\n        except Chapter.DoesNotExist:\n            return JsonResponse({'message': 'The chapter does not exist'}, status=status.HTTP_404_NOT_FOUND)\n    \n        # Serialize the data\n        serializer = ChapterSerializer(chapter)\n    \n        # Return the serialized data\n        return JsonResponse({'chapter': serializer.data}, status=status.HTTP_200_OK)",
+        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_chapter_by_id(request, chapter_id):\n    \n        # Get the chapter from the database\n        # Check if the chapter exists\n        try:\n            chapter = Chapter.objects.get(chapter_id=chapter_id)\n        except Chapter.DoesNotExist:\n            return JsonResponse({'message': 'The chapter does not exist'}, status=status.HTTP_404_NOT_FOUND)\n    \n        # Serialize the data\n        serializer = ChapterSerializer(chapter)\n    \n        # Return the serialized data\n        return JsonResponse({'chapter': serializer.data}, status=status.HTTP_200_OK)",
         "required_models": [
             "Chapter"
         ]
     },
     "get_character_list": {
-        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication, SessionAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_character_list(request):\n\n    # Get all the characters from the database\n    characters = Character.objects.all()\n\n    # Serialize the data\n    serializer = CharacterSerializer(characters, many=True)\n\n    # Return the serialized data\n    return JsonResponse({'characters': serializer.data}, status=status.HTTP_200_OK)",
+        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_character_list(request):\n\n    # Get all the characters from the database\n    characters = Character.objects.all()\n\n    # Serialize the data\n    serializer = CharacterSerializer(characters, many=True)\n\n    # Return the serialized data\n    return JsonResponse({'characters': serializer.data}, status=status.HTTP_200_OK)",
         "required_models": [
             "Character"
         ]
     },
     "get_character_by_id": {
-        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication, SessionAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_character_by_id(request, character_id):\n\n    ## Get the character from the database\n    # Check if the character exists\n    try:\n        character = Character.objects.get(character_id=character_id)\n    except Character.DoesNotExist:\n        return JsonResponse({'message': 'The character does not exist'}, status=status.HTTP_404_NOT_FOUND)\n\n    # Serialize the data\n    serializer = CharacterSerializer(character)\n\n    # Return the serialized data\n    return JsonResponse({'character': serializer.data}, status=status.HTTP_200_OK)",
+        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_character_by_id(request, character_id):\n\n    ## Get the character from the database\n    # Check if the character exists\n    try:\n        character = Character.objects.get(character_id=character_id)\n    except Character.DoesNotExist:\n        return JsonResponse({'message': 'The character does not exist'}, status=status.HTTP_404_NOT_FOUND)\n\n    # Serialize the data\n    serializer = CharacterSerializer(character)\n\n    # Return the serialized data\n    return JsonResponse({'character': serializer.data}, status=status.HTTP_200_OK)",
         "required_models": [
             "Character"
         ]
     },
     "get_movie_list": {
-        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication, SessionAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_movie_list(request):\n\n    # Get all the movies from the database\n    movies = Movie.objects.all()\n\n    # Serialize the data\n    serializer = MovieSerializer(movies, many=True)\n\n    # Return the serialized data\n    return JsonResponse({'movies': serializer.data}, status=status.HTTP_200_OK)",
+        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_movie_list(request):\n\n    # Get all the movies from the database\n    movies = Movie.objects.all()\n\n    # Serialize the data\n    serializer = MovieSerializer(movies, many=True)\n\n    # Return the serialized data\n    return JsonResponse({'movies': serializer.data}, status=status.HTTP_200_OK)",
         "required_models": [
             "Movie"
         ]
     },
     "get_movie_by_id": {
-        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication, SessionAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_movie_by_id(request, movie_id):\n\n    ## Get the movie from the database\n    # Check if the movie exists\n    try:\n        movie = Movie.objects.get(movie_id=movie_id)\n    except Movie.DoesNotExist:\n        return JsonResponse({'message': 'The movie does not exist'}, status=status.HTTP_404_NOT_FOUND)\n\n    # Serialize the data\n    serializer = MovieSerializer(movie)\n\n    # Return the serialized data\n    return JsonResponse({'movie': serializer.data}, status=status.HTTP_200_OK)",
+        "function_def": "@api_view(['GET'])\n@authentication_classes([TokenAuthentication])\n@permission_classes([IsAuthenticated])\ndef get_movie_by_id(request, movie_id):\n\n    ## Get the movie from the database\n    # Check if the movie exists\n    try:\n        movie = Movie.objects.get(movie_id=movie_id)\n    except Movie.DoesNotExist:\n        return JsonResponse({'message': 'The movie does not exist'}, status=status.HTTP_404_NOT_FOUND)\n\n    # Serialize the data\n    serializer = MovieSerializer(movie)\n\n    # Return the serialized data\n    return JsonResponse({'movie': serializer.data}, status=status.HTTP_200_OK)",
         "required_models": [
             "Movie"
         ]
