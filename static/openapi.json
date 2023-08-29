@@ -15,7 +15,15 @@
         "/register": {
             "post": {
                 "summary": "Register a new user",
-                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserSerializer"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "User registered successfully",
@@ -36,14 +44,14 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request",
+                        "description": "Invalid data provided",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "message": {
-                                            "type": "string"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -56,27 +64,31 @@
         "/login": {
             "post": {
                 "summary": "Login User",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "username": {
-                                    "type": "string"
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
                                 },
-                                "password": {
-                                    "type": "string"
-                                }
+                                "required": [
+                                    "username",
+                                    "password"
+                                ]
                             }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -141,12 +153,12 @@
                 "summary": "Get a book by ID",
                 "parameters": [
                     {
-                        "name": "book_id",
                         "in": "path",
-                        "required": true,
+                        "name": "book_id",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -161,7 +173,7 @@
                         }
                     },
                     "404": {
-                        "description": "Book not found",
+                        "description": "The book does not exist",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -181,7 +193,6 @@
         "/chapters": {
             "get": {
                 "summary": "Get a list of chapters",
-                "parameters": [],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -212,7 +223,7 @@
         },
         "/chapter/{chapter_id}": {
             "get": {
-                "summary": "Get chapter by ID",
+                "summary": "Get a chapter by ID",
                 "parameters": [
                     {
                         "name": "chapter_id",
@@ -239,12 +250,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/ErrorMessage"
                                 }
                             }
                         }
@@ -294,12 +300,12 @@
                 "summary": "Get character by ID",
                 "parameters": [
                     {
-                        "name": "character_id",
                         "in": "path",
-                        "required": true,
+                        "name": "character_id",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -336,10 +342,100 @@
                     }
                 ]
             }
+        },
+        "/movies": {
+            "get": {
+                "summary": "Get a list of movies",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "movies": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Movie"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
+        },
+        "/movie/{movie_id}": {
+            "get": {
+                "summary": "Get a movie by ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "movie_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Movie not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "TokenAuth": [],
+                        "SessionAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
+            "UserSerializer": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
             "User": {
                 "type": "object",
                 "properties": {
@@ -353,12 +449,6 @@
                         "type": "integer"
                     },
                     "email": {
-                        "type": "string"
-                    },
-                    "first_name": {
-                        "type": "string"
-                    },
-                    "last_name": {
                         "type": "string"
                     }
                 }
@@ -384,6 +474,14 @@
                         "type": "string"
                     },
                     "book_id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ErrorMessage": {
+                "type": "object",
+                "properties": {
+                    "message": {
                         "type": "string"
                     }
                 }
@@ -423,6 +521,35 @@
                     },
                     "character_wikiurl": {
                         "type": "string"
+                    }
+                }
+            },
+            "Movie": {
+                "type": "object",
+                "properties": {
+                    "movie_id": {
+                        "type": "string"
+                    },
+                    "movie_name": {
+                        "type": "string"
+                    },
+                    "movie_runtimeInMinutes": {
+                        "type": "integer"
+                    },
+                    "movie_budgetInMillions": {
+                        "type": "integer"
+                    },
+                    "movie_boxOfficeRevenueInMillions": {
+                        "type": "number"
+                    },
+                    "movie_academyAwardNominations": {
+                        "type": "integer"
+                    },
+                    "movie_academyAwardWins": {
+                        "type": "integer"
+                    },
+                    "movie_rottenTomatoesScore": {
+                        "type": "number"
                     }
                 }
             }

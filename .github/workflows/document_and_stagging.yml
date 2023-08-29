@@ -21,6 +21,7 @@ jobs:
             api_version: 1.0.0
             api_server_url: https://lotr-django-api.vercel.app/api
             extracted_dir: static
+            branch: vercel_stage
         secrets:
             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
             LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
