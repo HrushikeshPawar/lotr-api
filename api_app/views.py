@@ -99,7 +99,7 @@ def get_book_by_id(request, book_id):
 
 # Get all the characters from LoTR, requires authentication
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_chapter_list(request):
 
@@ -115,7 +115,7 @@ def get_chapter_list(request):
 
 # Get a chapter by id, requires authentication
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_chapter_by_id(request, chapter_id):
     
@@ -135,7 +135,7 @@ def get_chapter_by_id(request, chapter_id):
 
 # Get all the characters from LoTR, requires authentication
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_character_list(request):
 
@@ -151,7 +151,7 @@ def get_character_list(request):
 
 # Get a character by id, requires authentication
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_character_by_id(request, character_id):
 
@@ -171,7 +171,7 @@ def get_character_by_id(request, character_id):
 
 # Get all the movies from LoTR, requires authentication
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_movie_list(request):
 
@@ -187,7 +187,7 @@ def get_movie_list(request):
 
 # Get a movie by id, requires authentication
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_movie_by_id(request, movie_id):
 
