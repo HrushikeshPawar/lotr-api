@@ -44,7 +44,7 @@
                         }
                     },
                     "400": {
-                        "description": "Invalid data",
+                        "description": "Invalid data provided",
                         "content": {
                             "application/json": {
                                 "schema": {
